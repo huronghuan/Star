@@ -80,11 +80,11 @@ contract('StarNotary', accounts => {
             await this.contract.createStar(user1_name,user1_story,user1_ra,user1_dec,user1_mag,user1_cen, token1, {from: user1})    
         })
 
-        it('coordinaor equal check',async function(){
+        it('coordinator equal check',async function(){
             assert.equal(await this.contract.checkIfStarExist(user2_dec,user2_mag,user2_cen),false)
         })
 
-        it('coordinaor unequal check',async function(){
+        it('coordinator unequal check',async function(){
             assert.equal(await this.contract.checkIfStarExist(user3_dec,user3_mag,user3_cen),true)
         })
     })
