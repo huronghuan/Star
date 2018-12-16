@@ -1,6 +1,6 @@
 pragma solidity ^0.4.23;
 
-import '../../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721.sol';
+import '../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721.sol';
 
 contract StarNotary is ERC721 { 
 
@@ -18,6 +18,11 @@ contract StarNotary is ERC721 {
     bytes [] internal starCoordination;
 
     function createStar(string _name,string _story,string _ra,string _dec,string _mag,string _cen, uint256 _tokenId) public { 
+
+        require(bytes(_name).length>0);
+        require(bytes(_story).length>0 );
+        require(bytes(_story).length<256);
+
         require(checkIfStarExist(_dec,_mag,_cen) == true);
 
         bytes memory co = abi.encodePacked(bytes(_dec),bytes(_mag),bytes(_cen));

@@ -32,7 +32,7 @@
                 web3 = new Web3(web3.currentProvider) // what Metamask injected 
             } else {
                 // Instantiate and set Ganache as your provider
-                web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:7545"));
+                web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/5afd2be08b9b41ec992bf6e4db36f007"));
             }
 
             // The default (top) wallet account from a list of test accounts 
@@ -470,7 +470,7 @@
                   ]
             );
             // Grab the contract at specified deployed address with the interface defined by the ABI
-            var starNotary = StarNotary.at('0xf5d8768bbe565dae092c7374dffd55b1372d99a8');
+            var starNotary = StarNotary.at('0xd6481d5270282729d0ed6b39ccf0dee38381c507');
             
             // Enable claim button being clicked
             function claimButtonClicked() { 
@@ -479,17 +479,26 @@
                         console.log(error)
                         return
                     }
-                    var account = accounts[0];
+                    console.log(accounts)
+                    var account = '0x6Bd3f700f96cB820cc66d24b1CD2E87b93a08d68';
                     var tokenId = 1;
-                    starNotary.createStar('awesome star','test star','1','1','1','1',tokenId,{from:account},function (error, result) {
-                        if (!error) {
-                            var starinfo = starNotary.tokenIdToStarInfo(tokenId);
-                            document.getElementById('star-name').innerText = starinfo[0];
-                            document.getElementById('star-owner').innerText = starNotary.ownerOf(tokenId);
-                        } else { 
-                            console.log(error);
-                        }
-                    });
+                    var starinfo= starNotary.tokenIdToStarInfo(tokenId);
+                    console.log(starinfo)
+                    if (starinfo && starinfo[0] != '' && starinfo[1] != '') {
+                        document.getElementById('star-name').innerText = starinfo[0];
+                        document.getElementById('star-owner').innerText = starNotary.ownerOf(tokenId,{from:account});
+                    }else{
+                        console.log('create new star')
+                        starNotary.createStar('awesome star','test star','1','1','1','1',tokenId,{from:account},function (error, result) {
+                            if (!error) {
+                                starinfo = starNotary.tokenIdToStarInfo(tokenId);
+                                document.getElementById('star-name').innerText = starinfo[0];
+                                document.getElementById('star-owner').innerText = starNotary.ownerOf(tokenId);
+                            } else { 
+                                console.log(error);
+                            }
+                        });
+                    }
                    
                 })
             }

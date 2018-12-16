@@ -13,20 +13,24 @@
  *   0xd05327ee0d434abbccbb79ae3a9af47dff5f3c93
  */
 
+const HDWalletProvider = require("truffle-hdwallet-provider");
+
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
   	networks: {
 	  development: {
 	   host: "127.0.0.1",
-	   port: 7545,
+	   port: 9545,
 	   network_id: "*" // Match any network id
 	 },
 	 rinkeby: {
 		  provider: function() {
-		 	return new HDWalletProvider("this is a test program named starNotary used for examing,author is huronghuan ", "https://rinkeby.infura.io/v3/5afd2be08b9b41ec992bf6e4db36f007")
+		 	return new HDWalletProvider("visit ensure jacket joy awkward similar silver room giggle stool tool short", "https://rinkeby.infura.io/v3/5afd2be08b9b41ec992bf6e4db36f007")
 		     },
 	      network_id: '4',
+	      gas: 6500000,
+	      gasPrice: 100000000000,
 	    }
 	}
 };
