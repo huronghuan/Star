@@ -8,7 +8,6 @@ A test program for Udacity examing
 >require **webpack-cli**
 >require **ganache-cli**
 
-
 ganache-cli
 
 >open another CMD client
@@ -16,6 +15,9 @@ ganache-cli
 npm install
 
 npm run dev
+
+> then visit http://127.0.0.1:8080
+> if you are using metamask and on network of rinkeby so you will directly interact with rinkeby 
 
 ##deploy
 
