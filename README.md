@@ -6,8 +6,15 @@ A test program for Udacity examing
 
 >require python version 2.*
 >require webpack-cli
+>require ganache-cli
+
+ganache-cli
+
+>open another CMD client
 
 npm install
+
+npm run dev
 
 ##deploy
 

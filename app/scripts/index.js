@@ -149,23 +149,22 @@ window.App = App
 
 window.addEventListener('load', function () {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-  // if (typeof web3 !== 'undefined') {
-  //   console.log('metamask provider')
-  //   // Use Mist/MetaMask's provider
-  //   window.web3 = new Web3(web3.currentProvider)
-  // } else {
-  if (truffleConfig.currentNetwork === 'rinkeby') {
-    console.log('rinkeby provider')
-    // rinkeyby environment
-    window.web3 = new Web3(truffleConfig.networks.rinkeby.provider())
+  if (typeof web3 !== 'undefined') {
+    console.log('metamask provider')
+    // Use Mist/MetaMask's provider
+    window.web3 = new Web3(web3.currentProvider)
   } else {
-    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    console.log('localhost provider')
-    window.web3 = new Web3(
-      new Web3.providers.HttpProvider('http://127.0.0.1:' + truffleConfig.networks.development.port))
+    if (truffleConfig.currentNetwork === 'rinkeby') {
+      console.log('rinkeby provider')
+      // rinkeyby environment
+      window.web3 = new Web3(truffleConfig.networks.rinkeby.provider())
+    } else {
+      // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+      console.log('localhost provider')
+      window.web3 = new Web3(
+        new Web3.providers.HttpProvider('http://127.0.0.1:' + truffleConfig.networks.development.port))
+    }
   }
-
-  // }
 
   App.start()
 

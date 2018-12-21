@@ -17,9 +17,9 @@ require('babel-register')
 
 const HDWalletProvider = require('truffle-hdwallet-provider')
 
-const MENOMIC = "visit ensure jacket joy awkward similar silver room giggle stool tool short"
+const MENOMIC = 'visit ensure jacket joy awkward similar silver room giggle stool tool short'
 
-const rinkeby_url = "https://rinkeby.infura.io/v3/5afd2be08b9b41ec992bf6e4db36f007"
+const rinkebyUrl = 'https://rinkeby.infura.io/v3/5afd2be08b9b41ec992bf6e4db36f007'
 
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
@@ -32,7 +32,7 @@ module.exports = {
     },
     rinkeby: {
       provider: function () {
-        return new HDWalletProvider( MENOMIC, rinkeby_url, 0, 4)
+        return new HDWalletProvider(MENOMIC, rinkebyUrl, 0, 4)
       },
       network_id: '4',
       gas: 4500000,
