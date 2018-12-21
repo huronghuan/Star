@@ -4,9 +4,10 @@ A test program for Udacity examing
 
 ## install
 
->require python version 2.*
->require webpack-cli
->require ganache-cli
+>require **python version 2.\***
+>require **webpack-cli**
+>require **ganache-cli**
+
 
 ganache-cli
 
@@ -25,9 +26,11 @@ truffle migrate
 ## deployed info
 
 ###contract address
-0xd6481d5270282729d0ed6b39ccf0dee38381c507
+0x8b4b307bd0d03c94f8f094d8bf1114665a2cfd4c
 
 ###transaction ID
-0xbe972b0f5f76e48bce84e6fcb77784a72c58c802e04502a2886d5f1f463baced
+0x73c97aa2cb5a4a6cf5e6e2479747c653b16ba09432ab0b0325b8312efa3bbdc6
 
+##sale star tokenId
+1
 
