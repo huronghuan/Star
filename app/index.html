@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Star Creator</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <script src="/app.js"></script>
+</head>
+<body>
+
+  <div class="container">
+            <div class="header">
+              <ul>
+                <li><a href="/index.html">StarNotary</a></li>
+                <li><a href="/info.html">StarInfo</a></li>
+                 <li><a href="/sales.html">SaleStar</a></li>
+              </ul>
+            </div>
+
+            <h1>Star Notary</h1>
+
+            <form>
+                  <div class="row">
+                      <label class="bold">Star Name:</label>
+                      <input type='text' id="star-name"></input>
+                  </div>
+                  <br/>
+                  <div class="row">
+                      <label class="bold">Star Story:</label>
+                      <input type="text" id="star-story"></input>
+                  </div>
+                  <br/>
+                  <div class="row">
+                      <label class="bold">Star Ra:</label>
+                      <input type="text" id="star-ra"></input>
+                  </div>
+                  <br/>
+                  <div class="row">
+                      <label class="bold">Star Dec:</label>
+                      <input type="text" id="star-dec"></input>
+                  </div>
+                  <br/>
+                  <div class="row">
+                      <label class="bold">Star Mag:</label>
+                      <input type="text" id="star-mag"></input>
+                  </div>
+                  <br/>
+                  <div class="row">
+                      <label class="bold">Star Cen:</label>
+                      <input type="text" id="star-cen"></input>
+                  </div>
+                  <br/>
+                  
+            </form>
+
+            <button id="claim-button" onclick="App.claimButtonClicked()">Claim Star</button>
+
+            <br/>
+            <div class="row">
+                <label class="bold">Star Owner:</label>
+                <label id="star-owner"></label>
+            </div>
+            <div class="row">
+                <label class="bold">Star ID:</label>
+                <a href="info.html?id=" onclick="this.href = this.href+this.innerText" id="star-id"></a>
+                <label>   click ID to see star info</label>
+            </div>
+            <br>
+            <div class="row">
+                  <label class="bold">Star Log:</label>
+                  <code id="errorcode"></code>
+            </div>
+        </div>
+</body>
+</html>
+

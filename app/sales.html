@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Star Sales</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container">
+            <div class="header">
+              <ul>
+                <li><a href="/index.html">StarNotary</a></li>
+                <li><a href="/info.html">StarInfo</a></li>
+                <li><a href="/sales.html">SaleStar</a></li>
+              </ul>
+            </div>
+            <h1>Sale Star</h1>
+            <br/>
+            <div class="row">
+                <label class="bold">Star ID:</label>
+                <input type="number" id="star-id"></input>
+            </div>
+            <div class="row">
+                <label class="bold">Star Price:</label>
+                <input type="number" id="star-price"></input>
+                <label> ether</label>
+            </div>
+            <button id="claim-button" onclick="App.saleStar()">Sale Star</button>
+            <br/>
+            <div class="row">
+                  <label class="bold">Star Log:</label>
+                  <code id="errorcode"></code>
+            </div>
+        </div>
+</body>
+</html>
+

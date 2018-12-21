@@ -16,14 +16,16 @@ contract StarNotary is ERC721 {
     mapping(uint256 => Star) private tokenIdToStarInfoes; 
     mapping(uint256 => uint256) private starsForSales;
     bytes [] internal starCoordination;
+    uint256 public lastId;
 
-    function createStar(string _name,string _story,string _ra,string _dec,string _mag,string _cen, uint256 _tokenId) public { 
+    function createStar(string _name,string _story,string _ra,string _dec,string _mag,string _cen, uint256 _tokenId) public returns (uint256){ 
 
-        require(bytes(_name).length>0);
-        require(bytes(_story).length>0 );
-        require(bytes(_story).length<256);
+        require(bytes(_name).length>0,"name reequired");
+        require(bytes(_story).length>0 ,"story required");
+        require(bytes(_story).length<256 ,"only access story less than 256 words");
+        require(_exists(_tokenId) == false,"tokenId had been exists");
 
-        require(checkIfStarExist(_dec,_mag,_cen) == true);
+        require(checkIfStarExist(_dec,_mag,_cen) == true,"duplicate coordinator");
 
         bytes memory co = abi.encodePacked(bytes(_dec),bytes(_mag),bytes(_cen));
 
@@ -34,20 +36,28 @@ contract StarNotary is ERC721 {
         tokenIdToStarInfoes[_tokenId] = newStar;
 
         _mint(msg.sender, _tokenId);
+
+        if(_exists(_tokenId) == false){
+            revert("star not be created");
+        }
+
+        lastId = _tokenId;
+        
+        return _tokenId;
     }
 
     function putStarUpForSale(uint256 _tokenId, uint256 _price) public { 
-        require(this.ownerOf(_tokenId) == msg.sender);
+        require(this.ownerOf(_tokenId) == msg.sender,"only star owner can sale star");
 
         starsForSales[_tokenId] = _price;
     }
 
     function buyStar(uint256 _tokenId) public payable { 
-        require(starsForSales[_tokenId] > 0);
+        require(starsForSales[_tokenId] > 0,"star was not saled");
         
         uint256 starCost = starsForSales[_tokenId];
         address starOwner = this.ownerOf(_tokenId);
-        require(msg.value >= starCost);
+        require(msg.value >= starCost," money not enough");
 
         _removeTokenFrom(starOwner, _tokenId);
         _addTokenTo(msg.sender, _tokenId);
@@ -91,10 +101,11 @@ contract StarNotary is ERC721 {
     }
 
     /**
-     * 获取所有售卖的Star
+     * 根据ID 获取 Star price
      * @return uint256
      */
     function starsForSale(uint256 _tokenId) public view returns (uint256){
         return starsForSales[_tokenId];
     }
+
 }
