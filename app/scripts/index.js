@@ -149,7 +149,7 @@ window.App = App
 
 window.addEventListener('load', function () {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-  if (typeof web3 !== 'undefined') {
+  if (typeof web3 !== 'undefined' && web3.currentProvider.selectedAddress) {
     console.log('metamask provider')
     // Use Mist/MetaMask's provider
     window.web3 = new Web3(web3.currentProvider)
