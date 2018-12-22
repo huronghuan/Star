@@ -39,5 +39,5 @@ module.exports = {
       gasPrice: 100000000000
     }
   },
-  currentNetwork:'development'// determine the current network for web use
+  currentNetwork:'rinkeby'// determine the current network for web use
 }
