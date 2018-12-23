@@ -9,7 +9,7 @@ import { default as truffleConfig } from '../../truffle.js'
 // Import our contract artifacts and turn them into usable abstractions.
 import StarNotaryArtifact from '../../build/contracts/StarNotary.json'
 
-const StarNotary = contract(StarNotaryArtifact)
+var StarNotary = contract(StarNotaryArtifact)
 
 let accounts
 let account
@@ -18,7 +18,7 @@ const App = {
   start: function () {
     // Bootstrap the MetaCoin abstraction for Use.
     StarNotary.setProvider(web3.currentProvider)
-
+    StarNotary = StarNotary.at("0x8b4b307bd0d03c94f8f094d8bf1114665a2cfd4c")
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function (err, accs) {
       if (err != null) {
@@ -46,24 +46,19 @@ const App = {
     cen = document.getElementById('star-cen').value
     mag = document.getElementById('star-mag').value
 
-    let meta
-    StarNotary.deployed().then(function (instance) {
-      meta = instance
-      document.getElementById('star-owner').innerText = ''
-      document.getElementById('errorcode').innerText = ''
-      return meta.lastId()
-    }, function (err) {
-      throw new Error(err)
-    }).then(function (id) {
+    document.getElementById('star-owner').innerText = ''
+    document.getElementById('errorcode').innerText = ''
+
+    StarNotary.lastId().then(function (id) {
       let tokenId = id.toNumber() + 1
       console.log(tokenId)
-      return meta.createStar(name, story, ra, dec, mag, cen, tokenId, { from : account, gas : 3141592 })
+      return StarNotary.createStar(name, story, ra, dec, mag, cen, tokenId, { from : account, gas : 3141592 })
     }).then(function (tx) {
       console.log(tx)
       let id = tx.logs[0].args.tokenId.toNumber()
       // output the created star ID
       document.getElementById('star-id').innerText = id
-      return meta.ownerOf(id)
+      return StarNotary.ownerOf(id)
     }, function (err) {
       console.log(err)
       throw err
@@ -81,12 +76,8 @@ const App = {
     if (id) {
       id = Number(id)
 
-      let meta
-      StarNotary.deployed().then(function (instance) {
-        document.getElementById('errorcode').innerText = ''
-        meta = instance
-        return meta.tokenIdToStarInfo(Number(id))
-      }).then(function (info) {
+      document.getElementById('errorcode').innerText = ''
+      StarNotary.tokenIdToStarInfo(Number(id)).then(function (info) {
         document.getElementById('star-name').innerText = info[0]
         document.getElementById('star-story').innerText = info[1]
         document.getElementById('star-ra').innerText = info[2]
@@ -110,15 +101,12 @@ const App = {
 
     console.log(starPrice)
 
+    document.getElementById('errorcode').innerText = ''
     if (id) {
       id = Number(id)
 
-      let meta
-      StarNotary.deployed().then(function (instance) {
-        document.getElementById('errorcode').innerText = ''
-        meta = instance
-        return meta.putStarUpForSale(Number(id), starPrice, { from:account, gas:3141592 })
-      }).then(function () {
+      StarNotary.putStarUpForSale(Number(id), starPrice, { from:account, gas:3141592 })
+      .then(function () {
         document.getElementById('errorcode').innerText = 'success to sale star of id ' + id
       }, function (err) {
         document.getElementById('errorcode').innerText = err
